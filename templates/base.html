@@ -1,0 +1,16 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2459d3">
+    <title>{% block title %}KDlab{% endblock %}</title>
+    <link rel="icon" href="{% static 'marca.svg' %}" type="image/svg+xml">
+    <link rel="stylesheet" href="{% static 'kdlab.css' %}">
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    {% block content %}{% endblock %}
+  </body>
+</html>

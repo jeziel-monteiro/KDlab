@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Entrar · KDlab{% endblock %}
+{% block body_class %}pagina-entrada{% endblock %}
+{% block content %}
+  <header class="cabecalho-entrada">
+    {% include "componentes/marca.html" %}
+    <span class="contexto">Gestão de laboratórios e equipamentos</span>
+  </header>
+
+  <main id="conteudo" class="entrada-layout">
+    <section class="apresentacao" aria-labelledby="apresentacao-titulo">
+      <p class="sobretitulo"><span class="ponto"></span> RECURSOS DA UNIVERSIDADE</p>
+      <h2 id="apresentacao-titulo">Mais espaço<br>para <span>aprender.</span></h2>
+      <p class="apresentacao-texto">Uma gestão que aproxima laboratórios, equipamentos e as pessoas que fazem a universidade acontecer.</p>
+      <div class="desenho-laboratorio" aria-hidden="true">
+        <div class="desenho-etiqueta"><span class="ponto"></span> ESPAÇOS PARA DESCOBERTAS</div>
+        <svg viewBox="0 0 460 215" fill="none">
+          <path d="M34 176V42h149m43 0h196v134H34m149-134v134m0-91h44m-44 42h44" stroke="#7390bf" stroke-width="2"/>
+          <path d="M183 42a43 43 0 0 0 43 43" stroke="#a3b8d8" stroke-dasharray="4 5"/>
+          <rect x="57" y="66" width="99" height="82" rx="5" fill="#e3ecfb" stroke="#a3b8d8"/>
+          <rect x="72" y="82" width="27" height="20" rx="3" fill="white" stroke="#7390bf"/>
+          <rect x="114" y="82" width="27" height="20" rx="3" fill="white" stroke="#7390bf"/>
+          <path d="M85 102v9m-9 0h18m33-9v9m-9 0h18" stroke="#7390bf"/>
+          <rect x="251" y="64" width="54" height="28" rx="5" fill="#e3ecfb" stroke="#a3b8d8"/>
+          <rect x="337" y="64" width="54" height="28" rx="5" fill="#e3ecfb" stroke="#a3b8d8"/>
+          <rect x="251" y="121" width="54" height="28" rx="5" fill="#e3ecfb" stroke="#a3b8d8"/>
+          <rect x="337" y="121" width="54" height="28" rx="5" fill="#e3ecfb" stroke="#a3b8d8"/>
+          <path d="M264 57v-8h28v8m58 0v-8h28v8m-114 49h28m58 0h28m-114 50v8h28v-8m58 0v8h28v-8" stroke="#a3b8d8" stroke-linecap="round"/>
+          <circle cx="414" cy="31" r="13" fill="#2459d3"/>
+          <path d="m409 31 4 4 7-8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M34 193h388M17 42v134" stroke="#c3d2e7" stroke-dasharray="3 5"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="cartao-entrada" aria-labelledby="entrada-titulo">
+      <div class="icone-acesso" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="11" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </div>
+      <p class="sobretitulo">SUA CONTA KDlab</p>
+      <h1 id="entrada-titulo">Entre no KDlab.</h1>
+      <p class="texto-apoio">Use os dados de acesso fornecidos pela administração.</p>
+
+      {% if form.non_field_errors %}
+        <div class="mensagem-erro" role="alert">{{ form.non_field_errors }}</div>
+      {% endif %}
+      <form method="post" action="{% url 'identidade:entrar' %}" class="formulario-entrada">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="campo">
+          {{ form.username.label_tag }}
+          {{ form.username }}
+          {{ form.username.errors }}
+        </div>
+        <div class="campo">
+          {{ form.password.label_tag }}
+          {{ form.password }}
+          {{ form.password.errors }}
+        </div>
+        <button class="botao-primario" type="submit">Entrar <span aria-hidden="true">→</span></button>
+      </form>
+      <div class="ajuda-acesso">
+        <span class="ajuda-icone" aria-hidden="true">i</span>
+        <p>Ainda não tem acesso?<br><span>Procure a administração do KDlab.</span></p>
+      </div>
+    </section>
+  </main>
+  <footer class="rodape-entrada"><span>KDlab · Ambiente acadêmico</span><span>Conhecimento começa com acesso.</span></footer>
+{% endblock %}

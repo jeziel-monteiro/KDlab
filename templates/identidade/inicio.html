@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Minha conta · KDlab{% endblock %}
+{% block content %}
+  <header class="cabecalho-app">
+    <div class="cabecalho-app-conteudo">
+      {% include "componentes/marca.html" %}
+      <nav aria-label="Navegação principal" class="navegacao">
+        <a class="link-atual" href="{% url 'inicio' %}" aria-current="page">Minha conta</a>
+        {% if request.user.is_superuser %}<a href="{% url 'admin:identidade_usuario_changelist' %}">Gerenciar usuários</a>{% endif %}
+        <form method="post" action="{% url 'identidade:sair' %}">
+          {% csrf_token %}
+          <button class="botao-sair" type="submit">Sair <span aria-hidden="true">↗</span></button>
+        </form>
+      </nav>
+    </div>
+  </header>
+  <main id="conteudo" class="painel-conta">
+    <p class="sobretitulo">MINHA CONTA</p>
+    <h1>Olá, {{ request.user.get_short_name|default:request.user.username }}<span class="marca-ponto">.</span></h1>
+    <p class="texto-apoio">Bom ter você no KDlab. Aqui estão seus dados de acesso.</p>
+    <section class="cartao-conta" aria-labelledby="conta-titulo">
+      <div class="conta-cabecalho">
+        <div class="avatar" aria-hidden="true">{{ request.user.username|slice:':1'|upper }}</div>
+        <div><h2 id="conta-titulo">Sua identificação</h2><p>Conta individual da plataforma</p></div>
+        <span class="situacao"><span class="ponto"></span> Acesso ativo</span>
+      </div>
+      <dl class="dados-conta">
+        <div><dt>Nome de usuário</dt><dd>{{ request.user.username }}</dd></div>
+        <div><dt>Nome completo</dt><dd>{{ request.user.get_full_name|default:"Não informado" }}</dd></div>
+        <div><dt>E-mail</dt><dd>{{ request.user.email|default:"Não informado" }}</dd></div>
+      </dl>
+    </section>
+    <div class="nota-conta"><span class="ajuda-icone" aria-hidden="true">i</span><p>Seus dados de acesso são individuais. Para solicitar uma alteração, procure a administração do KDlab.</p></div>
+  </main>
+  <footer class="rodape-conta">KDlab · Gestão de laboratórios e equipamentos</footer>
+{% endblock %}

@@ -1,0 +1,11 @@
+"""Entrada do experimento BL-01; não é a aplicação KDlab."""
+
+import os
+import sys
+
+from django.core.management import execute_from_command_line
+
+
+if __name__ == "__main__":
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+    execute_from_command_line(sys.argv)

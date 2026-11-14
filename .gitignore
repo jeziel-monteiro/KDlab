@@ -1,0 +1,19 @@
+# Diretório de configuração local presente na inspeção; não integra o produto.
+/.aws/
+
+# Ambiente Python e bytecode usados pela prova BL-01.
+.venv/
+__pycache__/
+*.py[cod]
+
+# Configuração e estáticos coletados da aplicação local.
+.env
+.env.*
+!.env.example
+/staticfiles/
+
+# Material da disciplina e saídas brutas de execução: somente cópias locais.
+/docs/Documento_Arquitetura_Software_ISO_42010.pdf
+/docs/evidencias/*.txt
+
+# Manter documentação do projeto, migrações e relatórios de avaliação.
